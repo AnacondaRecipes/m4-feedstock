@@ -24,3 +24,10 @@ if [[ ! ${HOST} =~ .*darwin.* ]]; then
   make check
 fi
 make install
+
+# Prevent /usr/bin/gm4 from getting used (which launches the Xcode install
+# dialog).
+if [[ ${target_platform} == osx-64 ]]; then
+  pushd ${PREFIX}/bin
+  ln -s m4 gm4
+fi
